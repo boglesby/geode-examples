@@ -1,14 +1,15 @@
-#Geode Function OnRegion Examples
+# Geode Function OnRegion Examples
 
-##Compile Classes
+## Compile Classes
 Compile the classes using the maven `package` task like:
 
+```
 mvn package
-
-##Start Locator
+```
+## Start Locator
 Modify the `GEODE` environment variable in the `setenv.sh` script to point to a Geode 1.9.0 installation.
 
-Note: The `pom.xml` currently points to Geode 1.9.0, but it could be any version.
+Note: The `pom.xml` currently depends on Geode 1.9.0, but it could be any version as long as the version used by `gfsh` in the `startlocator.sh` script matches the `pom.xml` dependency. 
 
 Start the locator using the `startlocator.sh` script like:
 
@@ -28,7 +29,7 @@ Successfully connected to: JMX Manager [host=host1, port=1099]
 
 Cluster configuration service is up and running.
 ```
-##Start Servers
+## Start Servers
 
 Start each server using the maven `exec` task like:
 
@@ -47,7 +48,7 @@ mvn exec:exec -Dserver -Dexec.workingdir=server-3
 ...
 Created GemFireCache[id = 697463019; isClosing = false; isShutDownAll = false; created = Fri Aug 23 14:38:53 PDT 2019; server = false; copyOnRead = false; lockLease = 120; lockTimeout = 60]
 ```
-##Load Entries
+## Load Entries
 Load entries into the regions using the maven `exec` task like:
 
 ```
@@ -58,7 +59,7 @@ Retrieved region: org.apache.geode.internal.cache.LocalRegion[path='/data';scope
 Retrieved region: org.apache.geode.internal.cache.LocalRegion[path='/function';scope=LOCAL';dataPolicy=EMPTY; concurrencyChecksEnabled]
 Loaded 1000 entries in 3955 ms
 ```
-##Execute Function With Argument
+## Execute Function With Argument
 Execute the function with keys in the argument using the maven `exec` task like:
 
 ```
@@ -81,7 +82,7 @@ Function Execution Processor2: nonNullLocalDataKeysAndValuesSize=7; nonNullLocal
 Function Execution Processor2: primaryData=org.apache.geode.internal.cache.LocalDataSet[path='/data';scope=DISTRIBUTED_NO_ACK';dataPolicy=PARTITION ;bucketIds=[0, 4, 69, 7, 71, 8, 74, 11, 76, 77, 79, 16, 17, 81, 83, 20, 87, 25, 89, 26, 90, 29, 93, 31, 34, 37, 101, 38, 104, 42, 111, 49, 51, 56, 57, 59, 60, 63]]
 Function Execution Processor2: nonNullPrimaryDataKeysAndValuesSize=4; nonNullPrimaryDataKeysAndValues={1=1, 3=3, 8=8, 9=9}
 ```
-##Execute Function With Filter
+## Execute Function With Filter
 Execute the function with keys in the filter using the maven `exec` task like:
 
 ```
@@ -104,7 +105,7 @@ Function Execution Processor2: nonNullLocalDataKeysAndValuesSize=1; nonNullLocal
 Function Execution Processor2: primaryData=org.apache.geode.internal.cache.LocalDataSet[path='/data';scope=DISTRIBUTED_NO_ACK';dataPolicy=PARTITION ;bucketIds=[64, 1, 66, 3, 6, 70, 9, 75, 12, 14, 78, 80, 19, 84, 22, 86, 24, 27, 92, 30, 94, 33, 97, 98, 36, 102, 39, 41, 105, 106, 44, 108, 45, 112, 50, 53, 54, 62]]
 Function Execution Processor2: nonNullPrimaryDataKeysAndValuesSize=1; nonNullPrimaryDataKeysAndValues={5=5}
 ```
-##Shutdown Servers And Locator
+## Shutdown Servers And Locator
 Shutdown the servers and locator using the `shutdownall.sh` script like:
 
 ```
