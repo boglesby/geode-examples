@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.apache.geodeexamples.function</groupId>
+  <artifactId>onregion</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>onregion</name>
+  <url>http://maven.apache.org</url>
+
+  <profiles>
+    <profile>
+      <id>server</id>
+      <activation>
+        <property>
+          <name>server</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.2.1</version>
+            <configuration>
+              <executable>java</executable>
+              <arguments>
+                <argument>-DgemfirePropertyFile=gemfire-server.properties</argument>
+                <argument>-Xms1g</argument>
+                <argument>-Xmx1g</argument>
+                <argument>-XX:+UseParNewGC</argument>
+                <argument>-XX:+UseConcMarkSweepGC</argument>
+                <argument>-classpath</argument>
+                <classpath/>
+                <argument>org.apache.geodeexamples.TestServer</argument>
+              </arguments>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>client</id>
+      <activation>
+        <property>
+          <name>client</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.2.1</version>
+            <configuration>
+              <executable>java</executable>
+              <arguments>
+                <argument>-DgemfirePropertyFile=gemfire-client.properties</argument>
+                <argument>-classpath</argument>
+                <classpath/>
+                <argument>org.apache.geodeexamples.TestClient</argument>
+                <argument>${operation}</argument>
+                <argument>${parameter}</argument>
+              </arguments>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.geode</groupId>
+      <artifactId>geode-core</artifactId>
+      <version>1.9.0</version>
+    </dependency>
+  </dependencies>
+
+</project>

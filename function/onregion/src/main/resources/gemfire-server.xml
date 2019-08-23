@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+  <cache
+    xmlns="http://geode.apache.org/schema/cache"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://geode.apache.org/schema/cache
+                        http://geode.apache.org/schema/cache/cache-1.0.xsd"
+    version="1.0">
+
+  <cache-server port="0"/>
+
+	<region name="function" refid="PARTITION_REDUNDANT"/>
+
+	<region name="data" refid="PARTITION_REDUNDANT">
+    <region-attributes>
+      <!--partition-attributes redundant-copies="1" colocated-with="function"/-->
+    </region-attributes>
+  </region>
+
+  <function-service>
+    <function>
+      <class-name>org.apache.geodeexamples.function.TestGetAllWithArgumentFunction</class-name>
+    </function>
+    <function>
+      <class-name>org.apache.geodeexamples.function.TestGetAllWithFilterFunction</class-name>
+    </function>
+  </function-service>
+
+</cache>
+

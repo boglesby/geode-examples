@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+  <client-cache
+    xmlns="http://geode.apache.org/schema/cache"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://geode.apache.org/schema/cache
+                        http://geode.apache.org/schema/cache/cache-1.0.xsd"
+    version="1.0">
+
+  <pool name="pool">
+    <locator host="localhost" port="12345"/>
+  </pool>
+
+	<region name="function" refid="PROXY"/>
+
+	<region name="data" refid="PROXY"/>
+
+</client-cache>
